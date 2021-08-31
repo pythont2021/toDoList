@@ -5,6 +5,16 @@
     <title>days</title>
   </head>
   <body>
-    <h2> It's a <%= thisDay %> !! </h2>
+
+    <% if (thisDay === "Saturday" || thisDay === "Sunday"){ %>
+
+      <h2 style = "color:green"> It's a <%= thisDay %> !! </h2>
+
+    <% }else{ %>
+
+      <h2 style = "color:orange"> It's a <%= thisDay %> !! </h2>
+
+    <% } %>
+
   </body>
 </html>
