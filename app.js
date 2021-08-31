@@ -8,6 +8,7 @@ const express = require("express");
 const request = require("request");
 const bodyParser= require("body-parser");
 const ejs = require('ejs');
+const date = require(__dirname+"/date.js")
 
 
 /////////////////////////////// CONFIGURE APP /////////////////////
@@ -21,36 +22,25 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 /////////////////////////////// CONSTANTS /////////////////////
 
-var homeItems = [];
-var workItems =[]
+const homeItems = [];
+const workItems =[]
 
 /////////////////////////////// GET ROUTE /////////////////////
 
 app.get("/",(req, res)=>{
-  let today = new Date();
-  let options = {
-    weekday : "long",
-    day : "numeric",
-    month : "long"
-  }
-  let day = today.toLocaleDateString("en-US", options);
-
+  let day =date.getDate()
   res.render("list.ejs", {listTitle:day, newItems:homeItems});
 });
 
-
 app.get("/work", (req, res)=>{
-
   res.render("list.ejs", {listTitle:"work list", newItems:workItems});
 });
 
 app.get("/about", (req, res)=>{
-
   res.render("about");
 });
 
 app.get("/contact", (req, res)=>{
-
   res.render("contact");
 });
 
@@ -60,7 +50,6 @@ app.get("/contact", (req, res)=>{
 app.post("/", (req, res)=>{
 
   let item = req.body.newItem;
-
   if (req.body.list === "work"){
     workItems.push(item)
     res.redirect("/work");
@@ -69,8 +58,6 @@ app.post("/", (req, res)=>{
     console.log(req.body.list);
     res.redirect("/");
   }
-
-
 });
 
 
