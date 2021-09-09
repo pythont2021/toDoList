@@ -14,7 +14,7 @@ const _ = require('lodash');
 /////////////////////////////// CONFIGURE APP /////////////////////
 
 const app = express()
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public/'));
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-mongoose.connect('mongodb://localhost:2717/toDoList');
+mongoose.connect('mongodb+srv://admin-python:admin123@aws.q2krl.mongodb.net/ToDoListApp');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -198,5 +198,5 @@ app.post("/delete", (req, res) => {
 /////////////////////////////// LISTEN PORT /////////////////////
 
 app.listen(port, () => {
-  console.log(`App is listening @ port http://localhost:${5000}`)
+  console.log(`App is listening @ port http://localhost:${port}`)
 })
